@@ -1,0 +1,7 @@
+pylsl
+numpy
+pyserial
+bitstring
+xmltodict
+requests
+pyOpenBCI
