@@ -23,11 +23,23 @@ outlet = StreamOutlet(info)
 # it pushes the corresponding marker through the LSL-outlet.
 
 with serial.Serial('COM5', 9600, timeout=0.005) as ser:
+  # Make sure iMotions starts to collect markers (press "play" on the sensor in
+  # iMotions during the following startup sequence):
+  print("Sending startup markers...")
+  try:
+    for i in range(4):
+      outlet.push_sample(['starting'])
+      time.sleep(5)
+  except:
+    print("ERROR: Start sequence failed.")
+
+  # Normal operating mode
   print("running....")
   while True:
     line = ser.readline().decode('ascii')
     try:
         intLine = int(line)
+        line += " ms"
         outlet.push_sample([line])
     except:
         if(line=='alarm'):
