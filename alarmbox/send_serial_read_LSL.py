@@ -1,6 +1,21 @@
 import serial
 import time
 from pylsl import StreamInfo, StreamOutlet
+from sys import argv
+
+# Check if port number was given, if not: try with open the default port:
+if len(argv)<2:
+  port = "COM4"
+  print(f"""=======WARNING=======
+Pass the port number as an input argument when running the script. E.g.:
+  >python send_serial_read_LSL.py COM4
+=====================
+Trying with the default port {port}...""")
+
+  port = "COM4"
+else:
+  port = argv[1]
+  print(f"Opening port {port}.")
 
 # create stream info:
 # StreamInfo(name, type, channels, sampling rate (0=irregular), datatype, unique ID)
@@ -23,7 +38,7 @@ outlet = StreamOutlet(info)
 # If it recieves a signal corresponding to a trigger-event, or reaction-event
 # it pushes the corresponding marker through the LSL-outlet.
 
-with serial.Serial('COM5', 9600, timeout=0.005) as ser:
+with serial.Serial(port, 9600, timeout=0.005) as ser:
   # Make sure iMotions starts to collect markers (press "play" on the sensor in
   # iMotions during the following startup sequence):
   print("Sending startup markers...")
