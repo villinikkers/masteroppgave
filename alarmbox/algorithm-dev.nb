@@ -1,0 +1,174 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='WolframDesktop 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       161,          7]
+NotebookDataLength[      5870,        164]
+NotebookOptionsPosition[      4453,        133]
+NotebookOutlinePosition[      4993,        151]
+CellTagsIndexPosition[      4950,        148]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Make a function that generates an array with n random numbers within the \
+range 5- N. The array should be sorted by size and the following restrictions \
+apply:\
+\>", "Text",
+ CellChangeTimes->{{3.791287712755579*^9, 3.791287735907444*^9}, {
+  3.7912878103213396`*^9, 
+  3.7912878890436935`*^9}},ExpressionUUID->"a2ac0103-d168-4328-8c00-\
+ad0786df815e"],
+
+Cell[CellGroupData[{
+
+Cell["First number > 10", "Item",
+ CellChangeTimes->{{3.7912879011970615`*^9, 
+  3.7912879138849726`*^9}},ExpressionUUID->"226e136c-e114-4599-a83a-\
+05e396f29e50"],
+
+Cell["Last number  < (N-5)", "Item",
+ CellChangeTimes->{{3.7912879011970615`*^9, 
+  3.791287935440618*^9}},ExpressionUUID->"e2476d74-e65e-436a-9cd4-\
+d025ec96e7ad"],
+
+Cell["The difference between two consecutive numbers must be > 5 ", "Item",
+ CellChangeTimes->{{3.7912879011970615`*^9, 
+  3.791287969591797*^9}},ExpressionUUID->"a07a5ba5-201c-47f0-89ff-\
+889b6eb5fd41"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Table", "[", 
+  RowBox[{
+   RowBox[{"RandomInteger", "[", 
+    RowBox[{"{", 
+     RowBox[{"5", ",", "240"}], "}"}], "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "5"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7912877433902197`*^9, 3.791287800217008*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"b4b40882-710d-4163-808f-ccfd4a2e8478"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"78", ",", "140", ",", "190", ",", "91", ",", "183"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.7912878006770086`*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"fe1e45d2-676d-4609-9755-78df51bbb58d"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"generate", "[", 
+   RowBox[{"n_", ",", " ", "duration_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"N", "=", 
+       RowBox[{"duration", "-", "5"}]}], ",", " ", 
+      RowBox[{"dtMin", " ", "=", " ", "5"}], ",", " ", 
+      RowBox[{"tMin", "=", "5"}], ",", " ", "t", ",", " ", "minDiffs"}], 
+     "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"t", "=", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"RandomInteger", "[", 
+          RowBox[{"{", 
+           RowBox[{"5", ",", "N"}], "}"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], "//", "Sort"}]}],
+      ";", "\[IndentingNewLine]", 
+     RowBox[{"minDiffs", " ", "=", 
+      RowBox[{
+       RowBox[{"Differences", "[", "t", "]"}], "//", "Min"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"minDiffs", "<", "5"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"generate", "[", 
+        RowBox[{"n", ",", "duration"}], "]"}], ",", " ", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "t", "]"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.7912879808341722`*^9, 3.791288134319027*^9}, {
+  3.7912881740434923`*^9, 3.7912882797261257`*^9}, {3.791288379624077*^9, 
+  3.7912884641715975`*^9}},
+ CellLabel->"In[15]:=",ExpressionUUID->"173ac6a4-d456-4a9d-beae-39bbe99c3bd8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"generate", "[", 
+  RowBox[{"5", ",", "240"}], "]"}]], "Input",
+ CellChangeTimes->{{3.791288135831348*^9, 3.7912881414521165`*^9}, {
+  3.791288473743486*^9, 3.791288503009536*^9}},
+ CellLabel->"In[21]:=",ExpressionUUID->"206a5b10-6c8d-43e1-b4b6-302a7ff3bbc7"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"54", ",", "67", ",", "130", ",", "197", ",", "235"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.79128828320745*^9, {3.791288474733301*^9, 3.791288503679367*^9}},
+ CellLabel->"Out[21]=",ExpressionUUID->"bac352ba-e787-4ed1-b958-6f997a047deb"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7912885700151205`*^9, 
+  3.791288589298055*^9}},ExpressionUUID->"a7ee7003-c931-43c1-98c3-\
+2496c68b5e60"]
+},
+WindowSize->{759, 733},
+WindowMargins->{{Automatic, 412}, {24, Automatic}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 11, 2019)",
+StyleDefinitions->FrontEnd`FileName[{$RootDirectory, "C:", "Users", 
+   "Christian", "AppData", "Roaming", "WolframDesktop", "SystemFiles", 
+   "FrontEnd", "StyleSheets"}, "Custom-default1.nb", CharacterEncoding -> 
+  "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[561, 20, 364, 8, 56, "Text",ExpressionUUID->"a2ac0103-d168-4328-8c00-ad0786df815e"],
+Cell[CellGroupData[{
+Cell[950, 32, 163, 3, 31, "Item",ExpressionUUID->"226e136c-e114-4599-a83a-05e396f29e50"],
+Cell[1116, 37, 164, 3, 31, "Item",ExpressionUUID->"e2476d74-e65e-436a-9cd4-d025ec96e7ad"],
+Cell[1283, 42, 203, 3, 31, "Item",ExpressionUUID->"a07a5ba5-201c-47f0-89ff-889b6eb5fd41"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1523, 50, 375, 9, 28, "Input",ExpressionUUID->"b4b40882-710d-4163-808f-ccfd4a2e8478"],
+Cell[1901, 61, 236, 5, 32, "Output",ExpressionUUID->"fe1e45d2-676d-4609-9755-78df51bbb58d"]
+}, Open  ]],
+Cell[2152, 69, 1535, 39, 162, "Input",ExpressionUUID->"173ac6a4-d456-4a9d-beae-39bbe99c3bd8"],
+Cell[CellGroupData[{
+Cell[3712, 112, 282, 5, 28, "Input",ExpressionUUID->"206a5b10-6c8d-43e1-b4b6-302a7ff3bbc7"],
+Cell[3997, 119, 283, 6, 32, "Output",ExpressionUUID->"bac352ba-e787-4ed1-b958-6f997a047deb"]
+}, Open  ]],
+Cell[4295, 128, 154, 3, 28, "Input",ExpressionUUID->"a7ee7003-c931-43c1-98c3-2496c68b5e60"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
