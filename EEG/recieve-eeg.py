@@ -1,6 +1,7 @@
 """Example program to show how to read a multi-channel time series from LSL.
 
 Modified to save EEG-recordings from the OpenBCI cython board in a csv-file.
+For testing purposes only, not applied in the main setup in the Master's thesis.
 
 """
 from time import strftime, localtime

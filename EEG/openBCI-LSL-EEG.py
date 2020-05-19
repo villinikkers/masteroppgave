@@ -34,6 +34,10 @@ else:
   outlet_eeg = StreamOutlet(info_eeg)
 
   def lsl_streamer(sample):
+      """
+      Convert the sample data from it's raw format (counts) to uV and push it
+      to the LSL-stream.
+      """
     outlet_eeg.push_sample(np.array(sample.channels_data)*SCALE_FACTOR_EEG)
 
 
