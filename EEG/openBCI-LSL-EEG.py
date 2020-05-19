@@ -37,6 +37,9 @@ else:
       """
       Convert the sample data from it's raw format (counts) to uV and push it
       to the LSL-stream.
+      * Input: Raw EEG data from the Cyton board, unit is counts
+      * Output: EEG-data formatted as a LSL-sample with unit micro-volts (uV). 
+
       """
     outlet_eeg.push_sample(np.array(sample.channels_data)*SCALE_FACTOR_EEG)
 
