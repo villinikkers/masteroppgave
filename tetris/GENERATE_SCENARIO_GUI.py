@@ -2,7 +2,9 @@ import tkinter as tk
 from tkinter import messagebox
 import subprocess
 import colorPalettes as cp
-#FIXME: clear list of scenarios in Listbox.
+import os
+from time import localtime, sleep
+#FIXME:
 
 #color scheme:
 
@@ -47,7 +49,7 @@ class App:
     self.ramp.grid(row=4, column=0)
 
     # Number of steps in the ramp up scenario
-    # TODO: unavailabe until ramp i checked
+    # TODO: make unavailabe until ramp i checked
     self.nStepsLabel = tk.Label(frame, text="Number ramp-up steps:",
       bg=cp.background, fg=cp.text)
     self.nStepsLabel.grid(row=5, column=0)
@@ -96,7 +98,7 @@ class App:
 
   # ************** end __init__ *****************************
   def addScenario(self):
-    # Add scnario name to the list of added scenarios:
+    """ Add scnario name to the list of added scenarios: """
     if self.nStepVar.get()=="":
       self.nStepVar.set('1')
 
@@ -111,8 +113,10 @@ class App:
     self.rampVar.set(0)
     self.nStepVar.set("")
 
-  # FIXME:
+
+
   def clearList(self):
+    """ Clears the list of generated scenarios """
     self.scenarioList.delete(0, self.scenarioList.size())
     self.scenarios = []
     self.rampVar.set(0)
@@ -120,8 +124,18 @@ class App:
     self.nameEntry.delete(first=0, last=len(self.nameEntry.get()))
     self.levelEntry.delete(first=0, last=len(self.levelEntry.get()))
     self.durationEntry.delete(first=0, last=len(self.durationEntry.get()))
-  # end FIXME
+
+  # Compil
   def generateVersions(self):
+    """
+    Compile the defined scenarios to executables
+    The individual python versions of each scenario is generated in the first
+    subprocess by calling the script generate_scenario_v2.py and passing the
+    scenario parameters defined in the GUI.
+
+    The second subprocess runs the script that compiles the generated tetris-
+    versions into executables.
+    """
     if(len(self.scenarios)==0):
       print("No scenario's added..")
     else:
@@ -131,9 +145,11 @@ class App:
         # scenario[3] = ramp?, scenario[4]=nSteps
         # argv = scriptname, name, startlevel, duration, ramp, nSteps = argv
 
-        # FIXME: generate_scenario_v2 not working...
+        #
+        #
         subprocess.run(
-          f"python generate_scenario_v2.py {scenario[0]} {scenario[1]} {scenario[2]} {scenario[3]} {scenario[4]}") #{scenario[3]} {scenario[4]} for v2
+          f"python generate_scenario_v2.py {scenario[0]} {scenario[1]} "\
+            f"{scenario[2]} {scenario[3]} {scenario[4]}")
         # end for loop scenario
 
 
@@ -157,20 +173,19 @@ class App:
       self.durationEntry.delete(first=0, last=len(self.durationEntry.get()))
       self.rampVar.set(0)
       self.nStepVar.set("")
+
+      # Rename folder to avoid accidental overwriting old scenarios:
+      timeNow = localtime()
+      newFolderName = f"{timeNow.tm_year}-{timeNow.tm_mon}-{timeNow.tm_mday}_"\
+        f"{timeNow.tm_hour}{timeNow.tm_min}_build"
+
+      sleep(1) # Necessary to avoid "Permission denied"-error when renameing
+      os.rename('build', newFolderName)
+
+
       # message box confirming completion:
       messagebox.showinfo("Compilation complete!", "Compilation complete!")
 
-    # Example function:
-    def say_hi(self):
-      # print content of nameEntry to terminal:
-      print(self.nameEntry.get())
-      print(self.rampVar.get())
-      print(self.scenarioList.size())
-      print(self.scenarioList.get(0, self.scenarioList.size()))
-
-      #Clear content of nameEntry:
-      self.nameEntry.delete(first=0, last = len(self.nameEntry.get()))
-      self.scenarioList.delete(first=0, last = self.scenarioList.size())
 
 
 #************ Run program ********************
