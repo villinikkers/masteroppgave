@@ -563,7 +563,7 @@ class Menu(object):
         setattr(self,'running', False)
         ########################################################################
 
-        # Original code continued (does not run)
+        # Original code continued (does not run) #TODO: Remove unused code
         menu = kezmenu.KezMenu(
             ['Play!', lambda: Game().main(screen,1)],
             ['Easy', lambda: Game().main(screen,1)],
