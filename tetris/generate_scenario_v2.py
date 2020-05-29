@@ -114,10 +114,6 @@ class Matris(object):
         self.highscore = load_score(mode)
         self.played_highscorebeaten_sound = False
 
-        #self.levelup_sound  = get_sound("levelup.wav")
-        #self.gameover_sound = get_sound("gameover.wav")
-        #self.linescleared_sound = get_sound("linecleared.wav")
-        #self.highscorebeaten_sound = get_sound("highscorebeaten.wav")
 
 
     def set_tetrominoes(self):
@@ -486,7 +482,6 @@ class Game(object):
                     self.redraw()
             except GameOver:
                 # restart game:
-                # main(self, screen, startlevel, duration, ramp, nSteps, i)
                 self.main(screen, self.startlevel, self.duration, self.ramp,
                     self.nSteps, self.i)
                 #return
