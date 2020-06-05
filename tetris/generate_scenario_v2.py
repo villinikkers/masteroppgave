@@ -1,9 +1,9 @@
 """
-Created by Christian - February 2020
+Author: Christian Erichsen - February 2020
 
-Script for generating different Tetris conditions for experiments using Tetris
-as an experimental task. difficulty and game duration are the variables that can
-be modified.
+Script for generating different versions of Tetris for use in experiments.
+Difficulty and game duration are the variables that can
+be modified to create different experimental conditions.
 """
 
 
@@ -18,7 +18,7 @@ startlevel = int(startlevel)
 ramp = int(ramp)
 nSteps = int(nSteps)
 output_filename = name +'.py'
-output_paramters = name + '.txt'
+output_parameters = name + '.txt'
 
 # Main code for the program to be generated:
 game = f"""
@@ -568,20 +568,9 @@ class Menu(object):
         setattr(self,'running', False)
         ########################################################################
 
-        # Original code continued (does not run)
-        menu = kezmenu.KezMenu(
-            ['Play!', lambda: Game().main(screen,1)],
-            ['Easy', lambda: Game().main(screen,1)],
-            ['Hard', lambda: Game().main(screen,10)],
-            ['Quit', lambda: setattr(self, 'running', False)]
-        )
-        menu.position = (50, 50)
-        menu.enableEffect('enlarge-font-on-focus', font=None, size=60, enlarge_factor=1.2, enlarge_time=0.3)
-        menu.color = (255,255,255)
-        menu.focus_color = (40, 200, 40)
 
         nightmare = construct_nightmare(screen.get_size())
-        highscoresurf = self.construct_highscoresurf()
+        #highscoresurf = self.construct_highscoresurf()
 
         timepassed = clock.tick(30) / 1000.
 
@@ -603,12 +592,6 @@ class Menu(object):
             screen.blit(highscoresurf, highscoresurf.get_rect(right=WIDTH-50, bottom=HEIGHT-50))
             menu.draw(screen)
             pygame.display.flip()
-
-    def construct_highscoresurf(self):
-        font = pygame.font.Font(None, 50)
-        highscore = load_score(mode)
-        text = "Highscore: {{}}".format(highscore)
-        return font.render(text, True, (255,255,255))
 
 def construct_nightmare(size):
     surf = Surface(size)
@@ -641,7 +624,7 @@ if __name__ == '__main__':
 
 # Generate new python program with the given parameters:
 with open(output_filename, 'w') as f:
-  with  open(output_paramters, 'w') as p:
+  with  open(output_parameters, 'w') as p:
     # Write the game to a new python file:
     f.write(game)
     # Write the parameters to a separate file for quick inspection:
