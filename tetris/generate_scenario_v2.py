@@ -563,23 +563,9 @@ class Menu(object):
         setattr(self,'running', False)
         ########################################################################
 
-<<<<<<< HEAD
-=======
-        # Original code continued (does not run) #TODO: Remove unused code
-        menu = kezmenu.KezMenu(
-            ['Play!', lambda: Game().main(screen,1)],
-            ['Easy', lambda: Game().main(screen,1)],
-            ['Hard', lambda: Game().main(screen,10)],
-            ['Quit', lambda: setattr(self, 'running', False)]
-        )
-        menu.position = (50, 50)
-        menu.enableEffect('enlarge-font-on-focus', font=None, size=60, enlarge_factor=1.2, enlarge_time=0.3)
-        menu.color = (255,255,255)
-        menu.focus_color = (40, 200, 40)
->>>>>>> fcea5b152aadbd2fcbec1794e22e63d8a6e11969
 
         nightmare = construct_nightmare(screen.get_size())
-        #highscoresurf = self.construct_highscoresurf()
+
 
         timepassed = clock.tick(30) / 1000.
 
