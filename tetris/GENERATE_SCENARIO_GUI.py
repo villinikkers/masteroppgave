@@ -125,7 +125,7 @@ class App:
     self.levelEntry.delete(first=0, last=len(self.levelEntry.get()))
     self.durationEntry.delete(first=0, last=len(self.durationEntry.get()))
 
-  # Compil
+  # Compile
   def generateVersions(self):
     """
     Compile the defined scenarios to executables
