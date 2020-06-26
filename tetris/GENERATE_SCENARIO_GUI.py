@@ -139,14 +139,9 @@ class App:
     if(len(self.scenarios)==0):
       print("No scenario's added..")
     else:
-      # Generate scenarios:
+      # Generate new python versions for each scenario defined:
       for scenario in self.scenarios:
-        # scenario[0] = name, scenatio[1] = level, scenario[2] = duration
-        # scenario[3] = ramp?, scenario[4]=nSteps
-        # argv = scriptname, name, startlevel, duration, ramp, nSteps = argv
 
-        #
-        #
         subprocess.run(
           f"python generate_scenario_v2.py {scenario[0]} {scenario[1]} "\
             f"{scenario[2]} {scenario[3]} {scenario[4]}")
@@ -159,6 +154,8 @@ class App:
       for filename in self.filenames:
         self.filenamesStr += filename + " "
       self.filenamesStr = self.filenamesStr[:-1]
+
+      # Generate the setup file required for compilation to executable:
       subprocess.run(
         f"python generate_setup.py {self.filenamesStr}")
 
